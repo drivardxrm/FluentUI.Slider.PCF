@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="DR" constructor="FluentUISlider" version="0.0.1" display-name-key="FluentUISlider" description-key="Turn a numeric field into a FluentUI v9 Slider" control-type="standard" >
+  <control namespace="DR" constructor="FluentUISlider" version="0.0.2" display-name-key="FluentUI Slider" description-key="Turn a numeric field into a FluentUI v9 Slider" control-type="standard" >
     
     <external-service-usage enabled="false">
     </external-service-usage>
