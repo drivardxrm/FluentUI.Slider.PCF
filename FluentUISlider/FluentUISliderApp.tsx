@@ -1,6 +1,6 @@
 import { Badge, CounterBadge, FluentProvider, Label, makeStyles, Slider, SliderProps, teamsDarkTheme, teamsHighContrastTheme, teamsLightTheme, Theme, useId, webDarkTheme, webLightTheme } from '@fluentui/react-components'
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 export interface IFluentSliderProps {
@@ -19,7 +19,7 @@ export interface IFluentSliderProps {
     // masked: boolean
  
     //Callback function : => PCF
-    onChange: (input: number) => void;
+    onSliderChange: (input: number) => void;
  }
 
 const themes: Record<"WebLight" | "WebDark" | "TeamsLight" | "TeamsDark" | "TeamsHighContrast", Theme> = {
@@ -40,8 +40,15 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
     
     const onSliderChange: SliderProps['onChange'] = (_, data) => {
         setSliderValue(data.value)
-        props.onChange(data.value)
+        props.onSliderChange(data.value)
     }
+
+    // If value is changed from outside the PCF
+    useEffect(() => {
+        if (sliderValue !== props.input) {
+            setSliderValue(props.input)
+        }
+     }, [props.input]); //Props are changed
     
     return (
         

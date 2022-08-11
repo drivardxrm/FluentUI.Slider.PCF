@@ -7,7 +7,19 @@ export class FluentUISlider implements ComponentFramework.StandardControl<IInput
     
     private _notifyOutputChanged: () => void;
     private _root: Root
-    private _props:IFluentSliderProps
+    private _props:IFluentSliderProps = {
+        input: 0,
+        min: 0,
+        max: 100,
+        step: 1,
+        size: "medium",
+        vertical: false,
+        showlabel: false,
+        label: "",
+        theme: "WebLight",
+        disabled: false,
+        onSliderChange: this.notifyChange.bind(this)
+    }
     private _inputvalue:number
     /**
      * Empty constructor.
@@ -29,23 +41,7 @@ export class FluentUISlider implements ComponentFramework.StandardControl<IInput
     {
         // Add control initialization code
         this._root = createRoot(container!)
-
-        //static props
-        this._props.min = context.parameters.min.raw ?? 0
-        this._props.max = context.parameters.max.raw ?? 100
-        this._props.step = context.parameters.step.raw ?? undefined
-        this._props.vertical = context.parameters.vertical?.raw === 'true' ?? false
-        this._props.showlabel = context.parameters.showLabel?.raw === 'true' ?? false
-        this._props.disabled = context.parameters.input.security?.editable ?? false
-
-        this._props.label = context.parameters.customlabel.raw !== null ?
-                    context.parameters.customlabel.formatted ?? context.parameters.customlabel.raw :
-                    context.parameters.input.attributes?.DisplayName ?? ''
-
-        this._props.size = context.parameters.size.raw ?? 'medium'
-
-        this._props.theme = context.parameters.theme.raw ?? 'medium'
-        this._props.onChange = this.notifyChange.bind(this)
+        this._notifyOutputChanged = notifyOutputChanged;
     }
 
 
@@ -55,6 +51,22 @@ export class FluentUISlider implements ComponentFramework.StandardControl<IInput
      */
     public updateView(context: ComponentFramework.Context<IInputs>): void
     {
+        //static props
+        this._props.min = context.parameters.min.raw ?? 0
+        this._props.max = context.parameters.max.raw ?? 100
+        this._props.step = context.parameters.step.raw ?? undefined
+        this._props.vertical = context.parameters.vertical?.raw === 'true' ?? false
+        this._props.showlabel = context.parameters.showLabel?.raw === 'true' ?? false
+        // this._props.disabled = context.parameters.input.security?.editable ?? false
+
+        this._props.label = context.parameters.customlabel.raw !== null ?
+                    context.parameters.customlabel.formatted ?? context.parameters.customlabel.raw :
+                    context.parameters.input.attributes?.DisplayName ?? ''
+
+        this._props.size = context.parameters.size.raw ?? 'medium'
+
+        this._props.theme = context.parameters.theme.raw ?? 'WebLight'
+        
         this._props.input = context.parameters.input.raw ?? (context.parameters.min.raw ?? 0)
         
         // Add code to update control view
