@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control namespace="DR" constructor="FluentUISlider" version="0.0.1" display-name-key="FluentUISlider" description-key="Turn a numeric field into a FluentUI v9 Slider" control-type="standard" >
+    
+    <external-service-usage enabled="false">
+    </external-service-usage>
+    
+    <property name="input" display-name-key="Input" description-key="Input column of the slider" of-type-group="numerictypes" usage="bound" required="true"/>
+
+    <property name="min" display-name-key="Min" description-key="Minimum Value of the slider" of-type="Whole.None" usage="input" required="true"/>
+
+    <property name="max" display-name-key="Min" description-key="Maximum Value of the slider" of-type="Whole.None" usage="input" required="true"/>
+
+    <property name="step" display-name-key="Step" description-key="Incremental step of the slider" of-type="Whole.None" usage="input" required="true"/>
+
+    <property name="size" display-name-key="Size" description-key="Size of the Badge. Default: medium" of-type="Enum" usage="input" required="true">
+      <value name="small" display-name-key="small" description-key="small">small</value>
+      <value name="medium" display-name-key="medium" description-key="medium" default="true">medium</value>
+    </property>
+
+    <property name="vertical" display-name-key="Vertical" description-key="Slider is vertical. Default = False" of-type="Enum" usage="input" required="true">
+      <value name="false" display-name-key="false" description-key="False" default="true">false</value>
+      <value name="true" display-name-key="true" description-key="True">true</value>     
+    </property>
+
+    <property name="showLabel" display-name-key="Show Label" description-key="Show label on the left side of the badge" of-type="Enum" usage="input" required="true">
+      <value name="false" display-name-key="false" description-key="False" default="true">false</value>
+      <value name="true" display-name-key="true" description-key="True">true</value>     
+    </property>
+    <property name="customlabel" display-name-key="Custom Label" description-key="(Optional) Custom label text, if blank the display name of the field will be shown" of-type="SingleLine.Text" usage="input"/>
+
+    <property name="theme" display-name-key="Theme" description-key="Theme. Default: Web Light" of-type="Enum" usage="input" required="true">
+      <value name="WebLight" display-name-key="WebLight" description-key="Web Light Theme" default="true">WebLight</value>
+      <value name="WebDark" display-name-key="WebDark" description-key="Web Dark Theme">WebDark</value>
+      <value name="TeamsLight" display-name-key="TeamsLight" description-key="Teams Light Theme">TeamsLight</value>
+      <value name="TeamsDark" display-name-key="TeamsDark" description-key="Teams Dark Theme">TeamsDark</value>
+      <value name="TeamsHighContrast" display-name-key="TeamsHighContrast" description-key="Teams High Contrast Theme">TeamsHighContrast</value>
+    </property>
+
+    <type-group name="numerictypes">
+        <type>Whole.None</type>
+        <type>Currency</type>
+        <type>FP</type>
+        <type>Decimal</type>
+    </type-group>
+
+    <resources>
+      <code path="index.ts" order="1"/>
+      <!-- UNCOMMENT TO ADD MORE RESOURCES
+      <css path="css/FluentUISlider.css" order="1" />
+      <resx path="strings/FluentUISlider.1033.resx" version="1.0.0" />
+      -->
+    </resources>
+    <!-- UNCOMMENT TO ENABLE THE SPECIFIED API
+    <feature-usage>
+      <uses-feature name="Device.captureAudio" required="true" />
+      <uses-feature name="Device.captureImage" required="true" />
+      <uses-feature name="Device.captureVideo" required="true" />
+      <uses-feature name="Device.getBarcodeValue" required="true" />
+      <uses-feature name="Device.getCurrentPosition" required="true" />
+      <uses-feature name="Device.pickFile" required="true" />
+      <uses-feature name="Utility" required="true" />
+      <uses-feature name="WebAPI" required="true" />
+    </feature-usage>
+    -->
+  </control>
+</manifest>
