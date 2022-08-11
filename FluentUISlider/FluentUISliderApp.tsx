@@ -58,28 +58,12 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
     const activetheme: Theme = themes[props.theme]
 
     const id = useId()
-
-    const getTooltipPosition = (value: number):PositioningShorthand => 
-    {
-        if(value / props.max < 0.33)
-        {
-          return props.vertical ? 'after-bottom' : 'above-start'
-        }
-        else if(value / props.max > 0.66)
-        {
-          return props.vertical ? 'after-top' : 'above-end'
-        }
-        else{
-          return props.vertical ? 'after' : 'above'
-        }
-    }
-
-    const [tooltipPos, setTooltipPos] = useState(getTooltipPosition(props.input))
+    const [thumbRef, setThumbRef] = useState<HTMLDivElement | null>(null);
+    
     const [sliderValue, setSliderValue] = useState(props.input)
     
     const onSliderChange: SliderProps['onChange'] = (_, data) => {
         setSliderValue(data.value)
-        setTooltipPos(getTooltipPosition(data.value))
         props.onSliderChange(data.value)
     }
 
@@ -101,7 +85,7 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
                   content={sliderValue}
                   relationship="label"
                   withArrow 
-                  positioning={tooltipPos}
+                  positioning={{ target: thumbRef, position: tooltipposition }}
                 >
                   <Slider
                       aria-valuetext={`Value is ${sliderValue}`}
@@ -114,6 +98,7 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
                       step={props.step}
                       vertical={props.vertical}
                       disabled={props.disabled}
+                      thumb={{ ref: setThumbRef }}
                   />
                 </Tooltip>
                 
