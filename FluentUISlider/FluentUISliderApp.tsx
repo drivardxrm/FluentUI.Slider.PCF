@@ -27,31 +27,41 @@ export interface IFluentSliderProps {
  // https://react.fluentui.dev/?path=/docs/concepts-upgrading-from-v8-components-flex-stack--page
  // https://react.fluentui.dev/?path=/docs/concepts-upgrading-from-v8-components-flex-stack-item--page
  const useStyles = makeStyles({
-  stack: {
+  stack: {  // must be merged with stackHorizontal or stackVertical
+
     display: 'flex',
-    flexDirection: 'column',
     flexWrap: 'nowrap',
-    width: 'auto',
-    height: 'auto',
+    width: 'fit-content',
+    height: 'fit-content',
     boxSizing: 'border-box',
     '> *': {
       textOverflow: 'ellipsis',
     },
-    '> :not(:first-child)': {
-      marginTop: '0px',
-    },
-    '> *:not(.ms-StackItem)': {
-      flexShrink: 1,
-    },
+    
+    
   },
-  stackHorizontal: {
+  stackHorizontal: {  // overrides for horizontal stack
     flexDirection: 'row',
+    marginLeft: '5px',
+    '> :not(:last-child)': {
+      marginRight: '12px',
+    }
   },
+  stackVertical: {  // overrides for vertical stack
+    
+    flexDirection: 'column',
+    marginLeft: '5px',
+    '> :not(:first-child)': {
+      marginTop: '10px',
+    }
+    
+  },
+  
   stackitem: {
-    height: 'auto',
-    width: 'auto',
-    flexShrink: 1,
-    alignSelf: 'center'
+    height: 'fit-content',
+    width: 'fit-content',
+    alignSelf: 'center',
+    flexShrink: 1
   }
 })
 
@@ -80,7 +90,7 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
         props.onSliderChange(data.value)
     }
 
-    const stackClasses = mergeClasses(classes.stack, props.vertical ? undefined : classes.stackHorizontal);
+    const stackClasses = mergeClasses(classes.stack, props.vertical ? classes.stackVertical : classes.stackHorizontal)
 
     // If value is changed from outside the PCF
     useEffect(() => {
@@ -93,22 +103,24 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
         
         
         <FluentProvider theme={activetheme}>
-            <div className={stackClasses}>
             {/* {props.showlabel && <Label htmlFor={id}>{props.label}</Label>}  */}
-            {/* <CounterBadge count={min} appearance='filled' color='informative' /> */}
-            {/* <div>
-              </> */}
-            {props.showminmax && <div className={classes.stackitem}><Label>{props.vertical ? props.max : props.min}</Label></div>}
-
             <Tooltip
               content={sliderValue}
               relationship="label"
               withArrow 
               positioning={{ target: thumbRef, position: tooltipposition }}
             >
-              <div className={classes.stackitem}>
+              
+              <div className={stackClasses}>
+              
+              
+                {props.showminmax && <div className={classes.stackitem}><Label>{props.vertical ? props.max : props.min}</Label></div>}
+
+              
+                
                 <Slider
                   id={id}
+                  className={classes.stackitem}
                   aria-valuetext={`Value is ${sliderValue}`}
                   value={sliderValue}
                   min={props.min}
@@ -122,12 +134,12 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
                   
                   thumb={{ ref: setThumbRef }}
                 />
-              </div>
-            </Tooltip>
-            
-            {props.showminmax && <div className={classes.stackitem}><Label>{props.vertical ? props.min : props.max}</Label></div>}
-          </div>    
-            
+                
+                
+                
+                {props.showminmax && <div className={classes.stackitem}><Label>{props.vertical ? props.min : props.max}</Label></div>}
+            </div>    
+          </Tooltip>   
             
         </FluentProvider>
         
@@ -135,7 +147,5 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
 }
 
 export default FluentUISliderApp
-function mergestyles(stack: string): string | undefined {
-  throw new Error('Function not implemented.');
-}
+
 
