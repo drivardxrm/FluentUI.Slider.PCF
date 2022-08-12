@@ -18,6 +18,8 @@ export class FluentUISlider implements ComponentFramework.StandardControl<IInput
         label: "",
         theme: "WebLight",
         disabled: false,
+        showminmax: true,
+        showtooltip: true,
         onSliderChange: this.notifyChange.bind(this)
     }
     private _inputvalue:number
@@ -63,10 +65,15 @@ export class FluentUISlider implements ComponentFramework.StandardControl<IInput
                     context.parameters.customlabel.formatted ?? context.parameters.customlabel.raw :
                     context.parameters.input.attributes?.DisplayName ?? ''
 
-        this._props.size = context.parameters.size.raw ?? 'medium'
+        this._props.showtooltip = context.parameters.showTooltip?.raw === 'true' ?? true
+        this._props.showminmax = context.parameters.showMinMax?.raw === 'true' ?? true
 
+
+        this._props.size = context.parameters.size.raw ?? 'medium'
+        
         this._props.theme = context.parameters.theme.raw ?? 'WebLight'
         
+        // Main value
         this._props.input = context.parameters.input.raw ?? (context.parameters.min.raw ?? 0)
         
         // Add code to update control view

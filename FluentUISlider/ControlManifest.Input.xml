@@ -29,6 +29,16 @@
     </property>
     <property name="customlabel" display-name-key="Custom Label" description-key="(Optional) Custom label text, if blank the display name of the field will be shown" of-type="SingleLine.Text" usage="input"/>
 
+    <property name="showTooltip" display-name-key="Show Tooltip" description-key="Show tooltip with selected value. Default = True" of-type="Enum" usage="input" required="true">
+      <value name="false" display-name-key="false" description-key="False">false</value>
+      <value name="true" display-name-key="true" description-key="True" default="true">true</value>     
+    </property>
+
+    <property name="showMinMax" display-name-key="Show Min Max" description-key="Show min and max values. Default = True" of-type="Enum" usage="input" required="true">
+      <value name="false" display-name-key="false" description-key="False">false</value>
+      <value name="true" display-name-key="true" description-key="True" default="true">true</value>     
+    </property>
+
     <property name="theme" display-name-key="Theme" description-key="Theme. Default: Web Light" of-type="Enum" usage="input" required="true">
       <value name="WebLight" display-name-key="WebLight" description-key="Web Light Theme" default="true">WebLight</value>
       <value name="WebDark" display-name-key="WebDark" description-key="Web Dark Theme">WebDark</value>
