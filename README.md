@@ -13,3 +13,6 @@ PowerApps Component framework (PCF) Control to render [FluentUI v9](https://reac
 
 
 ![image](https://user-images.githubusercontent.com/38399134/184493398-d59c03a1-e92f-4aca-8aca-2ff657386fb8.png)
+
+![image](https://user-images.githubusercontent.com/38399134/184504869-685e24c8-8b10-4b24-beee-09f99112e02f.png)
+
