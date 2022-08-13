@@ -1,4 +1,4 @@
-import { FluentProvider, Label, makeStyles, mergeClasses, Slider, SliderProps, teamsDarkTheme, teamsHighContrastTheme, teamsLightTheme, Theme, Tooltip, useId, webDarkTheme, webLightTheme } from '@fluentui/react-components'
+import { Badge, Divider, FluentProvider, Label, makeStyles, mergeClasses, Slider, SliderProps, teamsDarkTheme, teamsHighContrastTheme, teamsLightTheme, Theme, Tooltip, useId, webDarkTheme, webLightTheme } from '@fluentui/react-components'
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 
@@ -16,6 +16,9 @@ export interface IFluentSliderProps {
     size: "small" | "medium"
     showminmax: boolean
     showtooltip: boolean
+    showValue: boolean
+    prefix: string | undefined
+    suffix: string | undefined
  
     disabled: boolean
     // masked: boolean
@@ -48,7 +51,6 @@ export interface IFluentSliderProps {
     }
   },
   stackVertical: {  // overrides for vertical stack
-    
     flexDirection: 'column',
     marginLeft: '5px',
     '> :not(:first-child)': {
@@ -62,6 +64,22 @@ export interface IFluentSliderProps {
     width: 'fit-content',
     alignSelf: 'center',
     flexShrink: 1
+  },
+  stackitemSliderVertical: {
+    alignSelf: 'left',
+    marginLeft: '10px',
+    flexShrink: 1
+  },
+  stackitemBadgeVertical: {
+    alignSelf: 'left',
+    marginLeft: '5px',
+    flexShrink: 1
+  },
+  tooltip: {
+    paddingLeft: '0px',
+    paddingRight: '0px',
+    paddingTop: '0px',
+    paddingBottom: '0px'
   }
 })
 
@@ -91,7 +109,8 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
     }
 
     const stackClasses = mergeClasses(classes.stack, props.vertical ? classes.stackVertical : classes.stackHorizontal)
-
+    const sliderStackItemClasses = mergeClasses(classes.stackitem, props.vertical ? classes.stackitemSliderVertical : undefined)
+    const badgeStackItemClasses = mergeClasses(classes.stackitem, props.vertical ? classes.stackitemBadgeVertical : undefined)
     // If value is changed from outside the PCF
     useEffect(() => {
         if (sliderValue !== props.input) {
@@ -105,7 +124,13 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
         <FluentProvider theme={activetheme}>
             {/* {props.showlabel && <Label htmlFor={id}>{props.label}</Label>}  */}
             <Tooltip
-              content={sliderValue}
+              // content={`${props.prefix}${sliderValue}${props.suffix}`}
+              content={{
+                children: <Badge shape='rounded' appearance='ghost'>
+                            {props.prefix}{sliderValue}{props.suffix}
+                        </Badge>,
+                className: classes.tooltip
+              }}              
               relationship="label"
               withArrow 
               positioning={{ target: thumbRef, position: tooltipposition }}
@@ -113,14 +138,33 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
               
               <div className={stackClasses}>
               
+                {/* Display value Vertical mode */}
+                {props.showValue && props.vertical === true && 
+                  <>
+                    <div className={badgeStackItemClasses}>
+                      <Badge shape='rounded' appearance='filled'>
+                        {props.prefix}{sliderValue}{props.suffix}
+                      </Badge>
+                    </div>
+                    <div className={classes.stackitem}>
+                      <Divider/>
+                    </div>
+                  </>
+                }
               
-                {props.showminmax && <div className={classes.stackitem}><Label>{props.vertical ? props.max : props.min}</Label></div>}
+                {props.showminmax &&
+                  <div className={badgeStackItemClasses}>
+                    <Badge shape='rounded' appearance='tint'>
+                      {props.prefix}{props.vertical ? props.max : props.min}{props.suffix}
+                    </Badge>
+                  </div>
+                }
 
               
                 
                 <Slider
                   id={id}
-                  className={classes.stackitem}
+                  className={sliderStackItemClasses}
                   aria-valuetext={`Value is ${sliderValue}`}
                   value={sliderValue}
                   min={props.min}
@@ -137,7 +181,26 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
                 
                 
                 
-                {props.showminmax && <div className={classes.stackitem}><Label>{props.vertical ? props.min : props.max}</Label></div>}
+                {props.showminmax && 
+                  <div className={badgeStackItemClasses}>
+                    <Badge shape='rounded' appearance='tint'>
+                      {props.prefix}{props.vertical ? props.min : props.max}{props.suffix}
+                    </Badge>
+                  </div>}
+
+                {/* Display value horizontal mode */}
+                {props.showValue && props.vertical === false && 
+                  <>
+                    <div className={badgeStackItemClasses}>
+                      <Divider vertical={true} />
+                    </div>
+                    <div className={badgeStackItemClasses}>
+                      <Badge shape='rounded' appearance='filled'>
+                        {props.prefix}{sliderValue}{props.suffix}
+                      </Badge>
+                    </div>
+                  </>
+                }
             </div>    
           </Tooltip>   
             

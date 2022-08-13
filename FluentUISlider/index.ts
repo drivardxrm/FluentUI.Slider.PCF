@@ -20,6 +20,9 @@ export class FluentUISlider implements ComponentFramework.StandardControl<IInput
         disabled: false,
         showminmax: true,
         showtooltip: true,
+        showValue: true,
+        prefix:undefined,
+        suffix:undefined,
         onSliderChange: this.notifyChange.bind(this)
     }
     private _inputvalue:number
@@ -67,8 +70,10 @@ export class FluentUISlider implements ComponentFramework.StandardControl<IInput
 
         this._props.showtooltip = context.parameters.showTooltip?.raw === 'true' ?? true
         this._props.showminmax = context.parameters.showMinMax?.raw === 'true' ?? true
+        this._props.showValue = context.parameters.showValue?.raw === 'true' ?? true
 
-
+        this._props.prefix = context.parameters.prefix.raw ?? undefined
+        this._props.suffix = context.parameters.suffix.raw ?? undefined
         this._props.size = context.parameters.size.raw ?? 'medium'
         
         this._props.theme = context.parameters.theme.raw ?? 'WebLight'

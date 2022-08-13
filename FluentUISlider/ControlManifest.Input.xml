@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="DR" constructor="FluentUISlider" version="0.0.2" display-name-key="FluentUI Slider" description-key="Turn a numeric field into a FluentUI v9 Slider" control-type="standard" >
+  <control namespace="DR" constructor="FluentUISlider" version="0.0.3" display-name-key="FluentUI Slider" description-key="Turn a numeric field into a FluentUI v9 Slider" control-type="standard" >
     
     <external-service-usage enabled="false">
     </external-service-usage>
@@ -34,10 +34,18 @@
       <value name="true" display-name-key="true" description-key="True" default="true">true</value>     
     </property>
 
+    <property name="showValue" display-name-key="Show Value" description-key="Show selected value after the slider. Default = True" of-type="Enum" usage="input" required="true">
+      <value name="false" display-name-key="false" description-key="False">false</value>
+      <value name="true" display-name-key="true" description-key="True" default="true">true</value>     
+    </property>
+
     <property name="showMinMax" display-name-key="Show Min Max" description-key="Show min and max values. Default = True" of-type="Enum" usage="input" required="true">
       <value name="false" display-name-key="false" description-key="False">false</value>
       <value name="true" display-name-key="true" description-key="True" default="true">true</value>     
     </property>
+
+    <property name="prefix" display-name-key="Prefix" description-key="(Optional) Display prefix. Ex $ => $0" of-type="SingleLine.Text" usage="input"/>
+    <property name="suffix" display-name-key="Suffix" description-key="(Optional) Display suffix. Ex $ => 0$" of-type="SingleLine.Text" usage="input"/>
 
     <property name="theme" display-name-key="Theme" description-key="Theme. Default: Web Light" of-type="Enum" usage="input" required="true">
       <value name="WebLight" display-name-key="WebLight" description-key="Web Light Theme" default="true">WebLight</value>
