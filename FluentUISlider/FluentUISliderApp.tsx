@@ -120,6 +120,7 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
                 target: thumbRef, 
                 position: tooltipposition 
               }}
+              visible={props.showtooltip == false || props.disabled ? false : undefined}
             >
               
               <div className={stackClasses}>
