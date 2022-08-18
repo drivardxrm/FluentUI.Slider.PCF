@@ -11,11 +11,9 @@ export class FluentUISlider implements ComponentFramework.StandardControl<IInput
         input: 0,
         min: 0,
         max: 100,
-        step: 1,
+        step: 0,
         size: "medium",
         vertical: false,
-        showlabel: false,
-        label: "",
         theme: "WebLight",
         disabled: false,
         showminmax: true,
@@ -61,12 +59,9 @@ export class FluentUISlider implements ComponentFramework.StandardControl<IInput
         this._props.max = context.parameters.max.raw ?? 100
         this._props.step = context.parameters.step.raw ?? undefined
         this._props.vertical = context.parameters.vertical?.raw === 'true' ?? false
-        this._props.showlabel = context.parameters.showLabel?.raw === 'true' ?? false
         // this._props.disabled = context.parameters.input.security?.editable ?? false
 
-        this._props.label = context.parameters.customlabel.raw !== null ?
-                    context.parameters.customlabel.formatted ?? context.parameters.customlabel.raw :
-                    context.parameters.input.attributes?.DisplayName ?? ''
+       
 
         this._props.showtooltip = context.parameters.showTooltip?.raw === 'true' ?? true
         this._props.showminmax = context.parameters.showMinMax?.raw === 'true' ?? true

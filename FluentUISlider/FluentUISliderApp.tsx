@@ -1,6 +1,7 @@
-import { Badge, Divider, FluentProvider, Label, makeStyles, mergeClasses, Slider, SliderProps, teamsDarkTheme, teamsHighContrastTheme, teamsLightTheme, Theme, Tooltip, useId, webDarkTheme, webLightTheme } from '@fluentui/react-components'
+import { Badge, Divider, FluentProvider, makeStyles, mergeClasses, Slider, SliderProps, Tooltip, useId } from '@fluentui/react-components'
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import { getTheme } from './utils/theme';
 
 
 export interface IFluentSliderProps {
@@ -10,8 +11,6 @@ export interface IFluentSliderProps {
     max: number
     step: number | undefined
     vertical: boolean
-    showlabel: boolean
-    label:string
     theme: "WebLight" | "WebDark" | "TeamsLight" | "TeamsDark" | "TeamsHighContrast"
     size: "small" | "medium"
     showminmax: boolean
@@ -31,7 +30,6 @@ export interface IFluentSliderProps {
  // https://react.fluentui.dev/?path=/docs/concepts-upgrading-from-v8-components-flex-stack-item--page
  const useStyles = makeStyles({
   stack: {  // must be merged with stackHorizontal or stackVertical
-
     display: 'flex',
     flexWrap: 'nowrap',
     width: 'fit-content',
@@ -40,8 +38,6 @@ export interface IFluentSliderProps {
     '> *': {
       textOverflow: 'ellipsis',
     },
-    
-    
   },
   stackHorizontal: {  // overrides for horizontal stack
     flexDirection: 'row',
@@ -55,10 +51,8 @@ export interface IFluentSliderProps {
     marginLeft: '5px',
     '> :not(:first-child)': {
       marginTop: '10px',
-    }
-    
+    }  
   },
-  
   stackitem: {
     height: 'fit-content',
     width: 'fit-content',
@@ -83,20 +77,11 @@ export interface IFluentSliderProps {
   }
 })
 
-const themes: Record<"WebLight" | "WebDark" | "TeamsLight" | "TeamsDark" | "TeamsHighContrast", Theme> = {
-    "TeamsLight": teamsLightTheme,
-    "TeamsDark": teamsDarkTheme,
-    "TeamsHighContrast": teamsHighContrastTheme,
-    "WebLight": webLightTheme,
-    "WebDark": webDarkTheme,
-};
-
-
 const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
 
     const classes = useStyles();
     const tooltipposition = props.vertical ? 'after' : 'above'
-    const activetheme: Theme = themes[props.theme]
+    const activetheme = getTheme(props.theme)
 
     const id = useId()
     const [thumbRef, setThumbRef] = useState<HTMLDivElement | null>(null);
@@ -122,9 +107,7 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
         
         
         <FluentProvider theme={activetheme}>
-            {/* {props.showlabel && <Label htmlFor={id}>{props.label}</Label>}  */}
             <Tooltip
-              // content={`${props.prefix}${sliderValue}${props.suffix}`}
               content={{
                 children: <Badge shape='rounded' appearance='ghost'>
                             {props.prefix}{sliderValue}{props.suffix}
@@ -133,7 +116,10 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
               }}              
               relationship="label"
               withArrow 
-              positioning={{ target: thumbRef, position: tooltipposition }}
+              positioning={{ 
+                target: thumbRef, 
+                position: tooltipposition 
+              }}
             >
               
               <div className={stackClasses}>
