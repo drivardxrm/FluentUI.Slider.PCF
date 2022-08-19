@@ -11,25 +11,6 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
 } as ComponentMeta<typeof FluentUISliderApp>;
 
-// private _props:IFluentSliderProps = {
-//   input: 0,
-//   min: 0,
-//   max: 100,
-//   step: 1,
-//   size: "medium",
-//   vertical: false,
-//   theme: "WebLight",
-//   disabled: false,
-//   showminmax: true,
-//   showtooltip: true,
-//   showValue: true,
-//   prefix:undefined,
-//   suffix:undefined,
-//   onSliderChange: this.notifyChange.bind(this)
-// }
-
-
-
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof FluentUISliderApp> = (args) => <FluentUISliderApp {...args} />;
 

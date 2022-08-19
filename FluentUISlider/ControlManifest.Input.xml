@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="DR" constructor="FluentUISlider" version="0.0.4" display-name-key="FluentUI Slider" description-key="Turn a numeric field into a FluentUI v9 Slider" control-type="standard" >
+  <control namespace="DR" constructor="FluentUISlider" version="0.0.5" display-name-key="FluentUI Slider" description-key="Turn a numeric field into a FluentUI v9 Slider" control-type="standard" preview-image="img/fluentui-slider.png">
     
     <external-service-usage enabled="false">
     </external-service-usage>
@@ -9,7 +9,7 @@
 
     <property name="min" display-name-key="Min" description-key="Minimum Value of the slider" of-type="Whole.None" usage="input" required="true"/>
 
-    <property name="max" display-name-key="Min" description-key="Maximum Value of the slider" of-type="Whole.None" usage="input" required="true"/>
+    <property name="max" display-name-key="Max" description-key="Maximum Value of the slider" of-type="Whole.None" usage="input" required="true"/>
 
     <property name="step" display-name-key="Step" description-key="Incremental step of the slider" of-type="Whole.None" usage="input" required="true"/>
 
@@ -23,12 +23,12 @@
       <value name="true" display-name-key="true" description-key="True">true</value>     
     </property>
 
-    <property name="showValue" display-name-key="Show Value" description-key="Show selected value after the slider. Default = True" of-type="Enum" usage="input" required="true">
+    <property name="showValue" display-name-key="Show Value" description-key="Show selected value. Default = True" of-type="Enum" usage="input" required="true">
       <value name="false" display-name-key="false" description-key="False">false</value>
       <value name="true" display-name-key="true" description-key="True" default="true">true</value>     
     </property>
 
-    <property name="showTooltip" display-name-key="Show Tooltip" description-key="Show tooltip with selected value. Default = True" of-type="Enum" usage="input" required="true">
+    <property name="showTooltip" display-name-key="Show Tooltip" description-key="Show tooltip with selected value when hovering over the slider. Default = True" of-type="Enum" usage="input" required="true">
       <value name="false" display-name-key="false" description-key="False">false</value>
       <value name="true" display-name-key="true" description-key="True" default="true">true</value>     
     </property>
