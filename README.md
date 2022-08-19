@@ -2,6 +2,11 @@
 
 PowerApps Component framework (PCF) Control to render [FluentUI v9](https://react.fluentui.dev/) sliders over Dataverse numerical fields.
 
+![image](https://user-images.githubusercontent.com/38399134/185525129-43db3064-27a3-4358-befb-87a7b4e65e49.png)
+
+
+![fluentui_badge_percent](https://user-images.githubusercontent.com/38399134/185524844-1f17a30d-37a0-4024-b654-2eb65b742924.gif)
+
 
 [Download Here](https://github.com/drivardxrm/FluentUI.Slider.PCF/releases/latest)
 
