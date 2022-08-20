@@ -1,4 +1,5 @@
 {
+  "homepage": "http://drivardxrm.github.io/FluentUI.Slider.PCF",
   "name": "pcf-project",
   "version": "1.0.0",
   "description": "Project containing your PowerApps Component Framework (PCF) control.",
@@ -10,7 +11,7 @@
     "refreshTypes": "pcf-scripts refreshTypes",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token=4a069ce10b6c"
+    "deploy-storybook": "gh-pages -d storybook-static"
   },
   "dependencies": {
     "@fluentui/react-components": "^9.2.0",
@@ -33,7 +34,6 @@
     "@typescript-eslint/eslint-plugin": "^4.29.0",
     "@typescript-eslint/parser": "^4.29.0",
     "babel-loader": "^8.2.5",
-    "chromatic": "^6.7.4",
     "clean-webpack-plugin": "^4.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-import": "^2.23.4",
@@ -43,7 +43,8 @@
     "pcf-scripts": "^1.16.6",
     "pcf-start": "^1.16.6",
     "speed-measure-webpack-plugin": "^1.5.0",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "gh-pages": "^4.0.0"
   },
   "readme": "ERROR: No README data found!",
   "_id": "pcf-project@1.0.0"
