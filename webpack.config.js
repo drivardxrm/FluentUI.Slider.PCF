@@ -6,7 +6,7 @@ const smp = new SpeedMeasurePlugin()
 
 module.exports = 
   smp.wrap({
-    devtool: 'source-map',
+    // devtool: 'source-map',
     plugins: [
       new CleanWebpackPlugin(),
     ]
