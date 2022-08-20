@@ -10,6 +10,8 @@ PowerApps Component framework (PCF) Control to render [FluentUI v9](https://reac
 
 [Download Here](https://github.com/drivardxrm/FluentUI.Slider.PCF/releases/latest)
 
+[Try Component in Storybook](https://drivardxrm.github.io/FluentUI.Slider.PCF/)
+
 #### Features:
 
 - **Configurable** : Min, Max, Step, Vertical, Show Value, Tooltip and more
@@ -33,6 +35,9 @@ PowerApps Component framework (PCF) Control to render [FluentUI v9](https://reac
 | Theme | Theme. (WebLight, WebDark, TeamsLight, TeamsDark, TeamsHighContrast) |   WebLight  |
 
 ## Screenshots ##
+
+![image](https://user-images.githubusercontent.com/38399134/185529529-ba5ee8b0-db7a-439c-8668-bf56bf3e42fa.png)
+
 
 ![image](https://user-images.githubusercontent.com/38399134/184493398-d59c03a1-e92f-4aca-8aca-2ff657386fb8.png)
 
