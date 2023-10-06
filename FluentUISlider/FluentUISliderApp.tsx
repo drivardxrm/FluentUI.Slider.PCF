@@ -1,7 +1,8 @@
-import { Badge, Divider, FluentProvider, makeStyles, mergeClasses, Slider, SliderProps, Tooltip, useId } from '@fluentui/react-components'
+import { Badge, Divider, FluentProvider, mergeClasses, Slider, SliderProps, Tooltip, useId } from '@fluentui/react-components'
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { getTheme } from './utils/theme';
+import { useStyles } from './styles/Styles';
 
 
 export interface IFluentSliderProps {
@@ -26,60 +27,10 @@ export interface IFluentSliderProps {
     onSliderChange: (input: number) => void;
  }
 
- // https://react.fluentui.dev/?path=/docs/concepts-upgrading-from-v8-components-flex-stack--page
- // https://react.fluentui.dev/?path=/docs/concepts-upgrading-from-v8-components-flex-stack-item--page
- const useStyles = makeStyles({
-  stack: {  // must be merged with stackHorizontal or stackVertical
-    display: 'flex',
-    flexWrap: 'nowrap',
-    width: 'fit-content',
-    height: 'fit-content',
-    boxSizing: 'border-box',
-    '> *': {
-      textOverflow: 'ellipsis',
-    },
-  },
-  stackHorizontal: {  // overrides for horizontal stack
-    flexDirection: 'row',
-    marginLeft: '5px',
-    '> :not(:last-child)': {
-      marginRight: '12px',
-    }
-  },
-  stackVertical: {  // overrides for vertical stack
-    flexDirection: 'column',
-    marginLeft: '5px',
-    '> :not(:first-child)': {
-      marginTop: '10px',
-    }  
-  },
-  stackitem: {
-    height: 'fit-content',
-    width: 'fit-content',
-    alignSelf: 'center',
-    flexShrink: 1
-  },
-  stackitemSliderVertical: {
-    alignSelf: 'left',
-    marginLeft: '10px',
-    flexShrink: 1
-  },
-  stackitemBadgeVertical: {
-    alignSelf: 'left',
-    marginLeft: '5px',
-    flexShrink: 1
-  },
-  tooltip: {
-    paddingLeft: '0px',
-    paddingRight: '0px',
-    paddingTop: '0px',
-    paddingBottom: '0px'
-  }
-})
 
 const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
 
-    const classes = useStyles();
+    const styles = useStyles();
     const tooltipposition = props.vertical ? 'after' : 'above'
     const activetheme = getTheme(props.theme)
 
@@ -93,9 +44,9 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
         props.onSliderChange(data.value)
     }
 
-    const stackClasses = mergeClasses(classes.stack, props.vertical ? classes.stackVertical : classes.stackHorizontal)
-    const sliderStackItemClasses = mergeClasses(classes.stackitem, props.vertical ? classes.stackitemSliderVertical : undefined)
-    const badgeStackItemClasses = mergeClasses(classes.stackitem, props.vertical ? classes.stackitemBadgeVertical : undefined)
+    const stackClasses = mergeClasses(styles.stack, props.vertical ? styles.stackVertical : styles.stackHorizontal)
+    const sliderStackItemClasses = mergeClasses(styles.stackitem, props.vertical ? styles.stackitemSliderVertical : undefined)
+    const badgeStackItemClasses = mergeClasses(styles.stackitem, props.vertical ? styles.stackitemBadgeVertical : undefined)
     // If value is changed from outside the PCF
     useEffect(() => {
         if (sliderValue !== props.input) {
@@ -112,7 +63,7 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
                 children: <Badge shape='rounded' appearance='ghost'>
                             {props.prefix}{sliderValue}{props.suffix}
                         </Badge>,
-                className: classes.tooltip
+                className: styles.tooltip
               }}              
               relationship="label"
               withArrow 
@@ -133,7 +84,7 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
                         {props.prefix}{sliderValue}{props.suffix}
                       </Badge>
                     </div>
-                    <div className={classes.stackitem}>
+                    <div className={styles.stackitem}>
                       <Divider/>
                     </div>
                   </>

@@ -7,6 +7,7 @@ export class FluentUISlider implements ComponentFramework.StandardControl<IInput
     
     private _notifyOutputChanged: () => void;
     private _root: Root
+    private _isDesignMode: boolean
     private _props:IFluentSliderProps = {
         input: 0,
         min: 0,
@@ -45,6 +46,7 @@ export class FluentUISlider implements ComponentFramework.StandardControl<IInput
         // Add control initialization code
         this._root = createRoot(container!)
         this._notifyOutputChanged = notifyOutputChanged;
+
     }
 
 
@@ -54,10 +56,17 @@ export class FluentUISlider implements ComponentFramework.StandardControl<IInput
      */
     public updateView(context: ComponentFramework.Context<IInputs>): void
     {
+        //https://butenko.pro/2023/01/08/pcf-design-time-vs-run-time/
+        if (location.ancestorOrigins[0] === "https://make.powerapps.com" ||
+            location.ancestorOrigins[0] === "https://make.preview.powerapps.com") {
+            this._isDesignMode = true;
+        }
+        
+        
         //static props
-        this._props.min = context.parameters.min.raw ?? 0
-        this._props.max = context.parameters.max.raw ?? 100
-        this._props.step = context.parameters.step.raw ?? undefined
+        this._props.min = context.parameters.min?.raw ?? 0
+        this._props.max = context.parameters.max?.raw ?? 100
+        this._props.step = context.parameters.step?.raw ?? undefined // Run mode
         this._props.vertical = context.parameters.vertical?.raw === 'true' ?? false
         // this._props.disabled = context.parameters.input.security?.editable ?? false
 
@@ -67,14 +76,16 @@ export class FluentUISlider implements ComponentFramework.StandardControl<IInput
         this._props.showminmax = context.parameters.showMinMax?.raw === 'true' ?? true
         this._props.showValue = context.parameters.showValue?.raw === 'true' ?? true
 
-        this._props.prefix = context.parameters.prefix.raw ?? undefined
-        this._props.suffix = context.parameters.suffix.raw ?? undefined
-        this._props.size = context.parameters.size.raw ?? 'medium'
+        this._props.prefix = context.parameters.prefix?.raw ?? undefined
+        this._props.suffix = context.parameters.suffix?.raw ?? undefined
+        this._props.size = context.parameters.size?.raw ?? 'medium'
         
-        this._props.theme = context.parameters.theme.raw ?? 'WebLight'
+        this._props.theme = context.parameters.theme?.raw ?? 'WebLight'
         
         // Main value
-        this._props.input = context.parameters.input.raw ?? (context.parameters.min.raw ?? 0)
+        this._props.input = this._isDesignMode ?
+                                (this._props.max - this._props.min) / 2 :                           // Design mode
+                                context.parameters.input.raw ?? (context.parameters.min.raw ?? 0)   // Run mode
         
         // Add code to update control view
         this._root.render(createElement(FluentUISliderApp, this._props)) 
