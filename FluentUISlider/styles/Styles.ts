@@ -6,7 +6,8 @@ import { makeStyles } from '@fluentui/react-components';
  export const useStyles = makeStyles({
     stack: {  // must be merged with stackHorizontal or stackVertical
       display: 'flex',
-      flexWrap: 'nowrap',
+      flexWrap: 'wrap-reverse',
+      justifyContent: 'flex-start',
       width: 'fit-content',
       height: 'fit-content',
       boxSizing: 'border-box',
