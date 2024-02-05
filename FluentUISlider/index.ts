@@ -2,6 +2,7 @@ import { createElement } from 'react';
 import { createRoot, Root } from 'react-dom/client';
 import FluentUISliderApp, { IFluentSliderProps } from './FluentUISliderApp';
 import {IInputs, IOutputs} from "./generated/ManifestTypes";
+import { v4 as uuidv4 } from 'uuid';
 
 export class FluentUISlider implements ComponentFramework.StandardControl<IInputs, IOutputs> {
     
@@ -9,6 +10,7 @@ export class FluentUISlider implements ComponentFramework.StandardControl<IInput
     private _root: Root
     private _isDesignMode: boolean
     private _props:IFluentSliderProps = {
+        instanceid: uuidv4(),
         input: 0,
         min: 0,
         max: 100,

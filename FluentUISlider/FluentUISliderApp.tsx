@@ -1,4 +1,4 @@
-import { Badge, Divider, FluentProvider, mergeClasses, Slider, SliderProps, Tooltip, useId } from '@fluentui/react-components'
+import { Badge, Divider, FluentProvider, IdPrefixProvider, mergeClasses, Slider, SliderProps, Tooltip, useId } from '@fluentui/react-components'
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { getTheme } from './utils/theme';
@@ -7,6 +7,7 @@ import { useStyles } from './styles/Styles';
 
 export interface IFluentSliderProps {
     //properties : PCF =>
+    instanceid: string
     input: number
     min: number
     max: number
@@ -56,7 +57,7 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
     
     return (
         
-        
+      <IdPrefixProvider value={`fluentuislider-${props.instanceid}-`}> 
         <FluentProvider theme={activetheme}>
             <Tooltip
               content={{
@@ -143,7 +144,7 @@ const FluentUISliderApp = (props:IFluentSliderProps): JSX.Element => {
           </Tooltip>   
             
         </FluentProvider>
-        
+      </IdPrefixProvider> 
     )
 }
 
