@@ -70,9 +70,17 @@ export class FluentUISlider implements ComponentFramework.StandardControl<IInput
         this._props.max = context.parameters.max?.raw ?? 100
         this._props.step = context.parameters.step?.raw ?? undefined // Run mode
         this._props.vertical = context.parameters.vertical?.raw === 'true' ?? false
-        // this._props.disabled = context.parameters.input.security?.editable ?? false
+        
 
-       
+        // If the bound attribute is disabled because it is inactive or the user doesn't have access
+		let isReadOnly = context.mode?.isControlDisabled;
+
+		// When a field has FLS enabled, the security property on the attribute parameter is set
+		if (context.parameters?.input?.security) {
+			isReadOnly = isReadOnly || !context.parameters.input.security.editable;		
+		}
+
+        this._props.disabled = isReadOnly
 
         this._props.showtooltip = context.parameters.showTooltip?.raw === 'true' ?? true
         this._props.showminmax = context.parameters.showMinMax?.raw === 'true' ?? true
