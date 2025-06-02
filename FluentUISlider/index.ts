@@ -49,6 +49,10 @@ export class FluentUISlider implements ComponentFramework.StandardControl<IInput
         this._root = createRoot(container!)
         this._notifyOutputChanged = notifyOutputChanged;
 
+        if ((context.mode as any).isAuthoringMode === true) {
+             this._isDesignMode = true;
+        }
+
     }
 
 
@@ -58,18 +62,12 @@ export class FluentUISlider implements ComponentFramework.StandardControl<IInput
      */
     public updateView(context: ComponentFramework.Context<IInputs>): void
     {
-        //https://butenko.pro/2023/01/08/pcf-design-time-vs-run-time/
-        if (location.ancestorOrigins[0] === "https://make.powerapps.com" ||
-            location.ancestorOrigins[0] === "https://make.preview.powerapps.com") {
-            this._isDesignMode = true;
-        }
-        
-        
+
         //static props
         this._props.min = context.parameters.min?.raw ?? 0
         this._props.max = context.parameters.max?.raw ?? 100
         this._props.step = context.parameters.step?.raw ?? undefined // Run mode
-        this._props.vertical = context.parameters.vertical?.raw === 'true' ?? false
+        this._props.vertical = context.parameters.vertical?.raw === 'true' 
         
 
         // If the bound attribute is disabled because it is inactive or the user doesn't have access
@@ -82,9 +80,9 @@ export class FluentUISlider implements ComponentFramework.StandardControl<IInput
 
         this._props.disabled = isReadOnly
 
-        this._props.showtooltip = context.parameters.showTooltip?.raw === 'true' ?? true
-        this._props.showminmax = context.parameters.showMinMax?.raw === 'true' ?? true
-        this._props.showValue = context.parameters.showValue?.raw === 'true' ?? true
+        this._props.showtooltip = context.parameters.showTooltip?.raw === 'true' 
+        this._props.showminmax = context.parameters.showMinMax?.raw === 'true' 
+        this._props.showValue = context.parameters.showValue?.raw === 'true' 
 
         this._props.prefix = context.parameters.prefix?.raw ?? undefined
         this._props.suffix = context.parameters.suffix?.raw ?? undefined
